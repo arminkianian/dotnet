@@ -31,6 +31,14 @@ namespace CompanyEmployees
             services.ConfigureRepositoryManager();
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddAuthentication("Bearer")
+               .AddJwtBearer("Bearer", opt =>
+               {
+                   opt.RequireHttpsMetadata = false;
+                   opt.Authority = "https://localhost:5005";
+                   opt.Audience = "companyApi";
+               });
+
             services.AddControllers();
         }
 
@@ -58,6 +66,7 @@ namespace CompanyEmployees
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

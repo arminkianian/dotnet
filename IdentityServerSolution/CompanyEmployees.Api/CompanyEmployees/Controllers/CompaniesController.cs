@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace CompanyEmployees.Controllers
 {
     [Route("api/companies")]
     [ApiController]
+    [Authorize]
     public class CompaniesController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
@@ -27,6 +29,8 @@ namespace CompanyEmployees.Controllers
         {
             try
             {
+                var claims = User.Claims;
+
                 var companies = _repository.Company.GetAllCompanies(trackChanges: false);
 
                 var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
