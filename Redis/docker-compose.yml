@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  studentapiwithredisdb:
+    image: ${DOCKER_REGISTRY-}studentapiwithredisdb
+    build:
+      context: .
+      dockerfile: StudentAPIWithRedisDB/Dockerfile
+  redis:
+    image: redis:alpine
+    container_name: redisStudentAPI
+    ports:
+      - 6379:6379

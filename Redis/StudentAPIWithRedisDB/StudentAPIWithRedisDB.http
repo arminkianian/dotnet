@@ -1,0 +1,6 @@
+@StudentAPIWithRedisDB_HostAddress = http://localhost:5158
+
+GET {{StudentAPIWithRedisDB_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
