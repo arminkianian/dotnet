@@ -20,6 +20,8 @@ namespace ConsoleApp1
                    .AsClosedTypesOf(typeof(ICommandHandler<>))
                    .InstancePerLifetimeScope();
 
+            builder.RegisterGenericDecorator(typeof(LoggingCommandHandlerDecorator<>), typeof(ICommandHandler<>));
+
             var container = builder.Build();
 
             using (var scope = container.BeginLifetimeScope())
